@@ -170,3 +170,4 @@ C:\BigSchool\BigSchool\obj\Debug\BigSchool.Migrations.PopulateCategoryTable.reso
 C:\BigSchool\BigSchool\obj\Debug\BigSchool.csproj.GenerateResource.Cache
 C:\BigSchool\BigSchool\obj\Debug\BigSchool.dll
 C:\BigSchool\BigSchool\obj\Debug\BigSchool.pdb
+C:\BigSchool\BigSchool\obj\Debug\BigSchool.Migrations.AddNameColumnToApplicationUser.resources
