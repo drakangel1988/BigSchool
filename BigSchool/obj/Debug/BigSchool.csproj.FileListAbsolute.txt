@@ -171,3 +171,10 @@ C:\BigSchool\BigSchool\obj\Debug\BigSchool.csproj.GenerateResource.Cache
 C:\BigSchool\BigSchool\obj\Debug\BigSchool.dll
 C:\BigSchool\BigSchool\obj\Debug\BigSchool.pdb
 C:\BigSchool\BigSchool\obj\Debug\BigSchool.Migrations.AddNameColumnToApplicationUser.resources
+C:\BigSchool\BigSchool\obj\Debug\BigSchool.Migrations.AddAttendance.resources
+C:\BigSchool\BigSchool\bin\System.Net.Http.Formatting.dll
+C:\BigSchool\BigSchool\bin\System.Web.Http.dll
+C:\BigSchool\BigSchool\bin\System.Web.Http.WebHost.dll
+C:\BigSchool\BigSchool\bin\System.Net.Http.Formatting.xml
+C:\BigSchool\BigSchool\bin\System.Web.Http.xml
+C:\BigSchool\BigSchool\bin\System.Web.Http.WebHost.xml
