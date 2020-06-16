@@ -1,20 +1,21 @@
 ﻿@model BigSchool.ViewModels.CoursesViewModel
 @{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Attending";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
+<h2>Attending</h2>
 
 @*<div class="row">
-    <ul>
-        @foreach(var course in Model)
-        {
-            <li>
-                @course.DateTime - @course.Lecturer.Name
-            </li>
-        }
-    </ul>
-</div>*@
+        <ul>
+            @foreach(var course in Model)
+            {
+                <li>
+                    @course.DateTime - @course.Lecturer.Name
+                </li>
+            }
+        </ul>
+    </div>*@
 
 
 <ul class="course">
@@ -30,11 +31,11 @@
                 </div>
             </div>
             <div class="details">
-                <span class ="lecturer">
+                <span class="lecturer">
                     @course.Lecturer.Name
                     @if (Model.ShowAction)
                     {
-                    <button class="btn btn-default btn-sm js-toggle-follow" data-user-id="@course.LecturerId">Follow</button>
+                        <button class="btn btn-default btn-sm js-toggle-follow" data-user-id="@course.LecturerId">Follow</button>
                     }
                 </span>
                 <span class="category">
@@ -42,7 +43,7 @@
                 </span>
                 @if (Model.ShowAction)
                 {
-                <button data-course-id="@course.Id" class="btn btn-default btn-sm js-toggle-attendance">Going?</button>
+                    <button data-course-id="@course.Id" class="btn btn-default btn-sm js-toggle-attendance">Going?</button>
                 }
             </div>
         </li>
