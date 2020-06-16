@@ -13,6 +13,8 @@
         }
     </ul>
 </div>*@
+
+
 <ul class="course">
     @foreach (var course in Model)
     {
@@ -37,6 +39,7 @@
         </li>
     }
 </ul>
+
 @section scripts
 {
     <script>
@@ -53,7 +56,7 @@
                 .fail(function () {
                     alert("something failed");
                 });
-            });
+           });
         });
     </script>
- }
+}
