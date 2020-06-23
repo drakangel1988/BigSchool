@@ -124,5 +124,13 @@ namespace BigSchool.Controllers
 
             return RedirectToAction("Index", "Home");
         }
+        public ActionResult Details (int id)
+        {
+            var course = _dbContext.Course
+                .Include(c => c.Lecturer)
+                .Include(c => c.Category)
+                .Where(c => c.Id == id).FirstOrDefault();
+            return View(course);
+        }
     }
 }

@@ -6,33 +6,76 @@ using System.Web;
 using System.Web.Mvc;
 using System.Data.Entity;
 using BigSchool.ViewModels;
+using Microsoft.AspNet.Identity;
 
 namespace BigSchool.Controllers
 {
     public class HomeController : Controller
     {
         private ApplicationDbContext _dbContext;
-        
         public HomeController()
         {
             _dbContext = new ApplicationDbContext();
         }
         public ActionResult Index()
         {
-            var upcommingCourses = _dbContext.Course
-                .Include(c =>c.Lecturer)
+            var upcomingCourses = _dbContext.Course
+                .Include(c => c.Lecturer)
                 .Include(c => c.Category)
-                .Where(c => c.DateTime > DateTime.Now);
+                .Where(c => c.DateTime > DateTime.Now && c.IsCanceled == false);
+            var viewModel = new CoursesViewModel
+            {
+                UpcommingCourses = upcomingCourses,
+                ShowAction = User.Identity.IsAuthenticated
+            };
+            ViewBag.Attendings = _dbContext.Attendances.ToList();
+            ViewBag.Followings = _dbContext.Followings.ToList();
+            ViewBag.Followees = _dbContext.Followings.ToList();
+            return View(viewModel);
+        }
+        [Authorize]
+        public ActionResult BSFeed()
+        {
+            var upcomingCourses = _dbContext.Course
+                .Include(c => c.Lecturer)
+                .Include(c => c.Category)
+                .Where(c => c.DateTime > DateTime.Now && c.IsCanceled == false);
 
             var viewModel = new CoursesViewModel
             {
-                UpcommingCourses = upcommingCourses,
+                UpcommingCourses = upcomingCourses,
                 ShowAction = User.Identity.IsAuthenticated
             };
 
+            var userId = User.Identity.GetUserId();
+
+            ViewBag.Followees = _dbContext.Followings
+                .Where(a => a.FollowerId == userId)
+                .ToList();
+            ViewBag.Attendings = _dbContext.Attendances.ToList();
+            ViewBag.Followings = _dbContext.Followings.ToList();
             return View(viewModel);
         }
 
+        [Authorize]
+        [HttpPost]
+        public ActionResult Search(string searchStr)
+        {
+            var upcomingCourses = _dbContext.Course
+               .Include(c => c.Lecturer)
+               .Include(c => c.Category)
+               .Where(c => c.DateTime > DateTime.Now && c.IsCanceled == false && c.Lecturer.Name.Contains(searchStr)
+               || c.Place.Contains(searchStr) && c.DateTime > DateTime.Now && c.IsCanceled == false
+               || c.Category.Name.Contains(searchStr) && c.DateTime > DateTime.Now && c.IsCanceled == false);
+            var viewModel = new CoursesViewModel
+            {
+                UpcommingCourses = upcomingCourses,
+                ShowAction = User.Identity.IsAuthenticated
+            };
+            ViewBag.Attendings = _dbContext.Attendances.ToList();
+            ViewBag.Followings = _dbContext.Followings.ToList();
+            return View("Index", viewModel);
+        }
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
